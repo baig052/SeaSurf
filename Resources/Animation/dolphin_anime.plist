@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+    <dict>
+        <key>frames</key>
+        <dict>
+            <key>Animation 1.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{454,2},{226,112}}</string>
+                <key>offset</key>
+                <string>{1,-5}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{23,30},{226,112}}</string>
+                <key>sourceSize</key>
+                <string>{270,162}</string>
+            </dict>
+            <key>Animation 2.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{234,2},{218,116}}</string>
+                <key>offset</key>
+                <string>{5,-3}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{31,26},{218,116}}</string>
+                <key>sourceSize</key>
+                <string>{270,162}</string>
+            </dict>
+            <key>Animation 3.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{2,2},{230,120}}</string>
+                <key>offset</key>
+                <string>{-1,-1}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{19,22},{230,120}}</string>
+                <key>sourceSize</key>
+                <string>{270,162}</string>
+            </dict>
+        </dict>
+        <key>metadata</key>
+        <dict>
+            <key>format</key>
+            <integer>2</integer>
+            <key>realTextureFileName</key>
+            <string>dolphin_anime.png</string>
+            <key>size</key>
+            <string>{682,124}</string>
+            <key>smartupdate</key>
+            <string>$TexturePacker:SmartUpdate:62e2fc9c0dad46cb5e71f7f8bc2294f4:53d0e39ef5e4dca1c050ce8a5bb6bc29:b197af8ed3b5636f9b488bd7e60427cb$</string>
+            <key>textureFileName</key>
+            <string>dolphin_anime.png</string>
+        </dict>
+    </dict>
+</plist>
