@@ -18,7 +18,6 @@ public:
 	CREATE_FUNC(Hurdles);
 
 private:	
-	Ring *ring;
 
 	Ring_2 *ring_2;
 

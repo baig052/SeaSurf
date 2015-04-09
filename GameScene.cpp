@@ -4,10 +4,12 @@
 #include "GameOverScene.h"
 #include "Dolphin.h"
 #include "Hurdles.h"
+#include "Ring.h"
 
 USING_NS_CC;
 
 extern Dolphin *ptr;
+extern Ring *Rptr;
 		
 Scene* GameScene::createScene()
 {
@@ -128,6 +130,16 @@ bool GameScene::onContactBegin( cocos2d::PhysicsContact &contact )
 		 jumpflag = true ;
 		
 	 }
+	 if(( DELETION_COLLISION_BITMASK == a->getCollisionBitmask() && POINT_COLLISION_BITMASK ==
+		 b->getCollisionBitmask() ) || ( DELETION_COLLISION_BITMASK == b->getCollisionBitmask() &&
+		 POINT_COLLISION_BITMASK ==	 a->getCollisionBitmask() ) )
+	{
+
+		Rptr->DeleteRing( this );
+		
+
+	}
+
 		 
 		 
 

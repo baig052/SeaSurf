@@ -7,6 +7,7 @@ class Ring
 {
 public:
 	Ring();
+	void DeleteRing(  cocos2d::Layer *layer );
 
 	void SpawnRing( cocos2d::Layer *layer );
 
