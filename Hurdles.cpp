@@ -27,7 +27,7 @@ bool Hurdles::init()
     origin = Director::getInstance()->getVisibleOrigin();
 	
 	schedule( schedule_selector( Hurdles::SpawnRing ) , RING_SPAWN_FREQUENCY * VisibleSize.width );
-	//schedule( schedule_selector( Hurdles::SpawnAnimals) , ANIMALS_SPAWN_FREQUENCY * VisibleSize.width /2 );
+	schedule( schedule_selector( Hurdles::SpawnAnimals) , ANIMALS_SPAWN_FREQUENCY * VisibleSize.width /2 );
 		
 	dol = new Dolphin(this);
 	ptr = dol;

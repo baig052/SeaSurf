@@ -16,7 +16,7 @@ bool Water::init()
 
 	auto backgroundSprite = Sprite::create("background.png");
 
-	auto waterSprite = Sprite::create("opacwater.png");
+	auto waterSprite = Sprite::create("water.png");
 	waterSprite->setScaleX(VisibleSize.width/backgroundSprite->getContentSize().width * 0.57);
 	waterSprite->setScaleY(VisibleSize.height/backgroundSprite->getContentSize().height * 1.77);
 

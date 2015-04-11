@@ -5,8 +5,8 @@
 
 static float co_ordX	=	0.50,
     co_ordY	=	1.50;
-static float co_ordX_dol = 0.80,
-	co_ordY_dol = 2.0;
+static float co_ordX_dol = 0.90,
+	co_ordY_dol = 2.4;
 
 class MainMenuScene : public cocos2d::Layer
 {
