@@ -30,7 +30,7 @@ void Ring_2::SpawnRing_2( cocos2d::Layer *layer)
 	layer->addChild( topNode , 2 );
 
 	auto topRingActionNode = MoveBy::create( SECOND_RING_MOVEMENT_SPEED * VisibleSize.width , Point( -VisibleSize.
-		width * 1.5 , 0 ));
+		width  , 0 ));
 
 	topNode->runAction( topRingActionNode );
 
@@ -47,7 +47,7 @@ void Ring_2::SpawnRing_2( cocos2d::Layer *layer)
 	layer->addChild( bottomNode , 4 );
 
 	auto bottomRingActionNode = MoveBy::create( SECOND_RING_MOVEMENT_SPEED * VisibleSize.width , Point( -VisibleSize.
-		width * 1.5 , 0 ));
+		width  , 0 ));
 
 	bottomNode->runAction( bottomRingActionNode );
 
@@ -66,7 +66,7 @@ void Ring_2::SpawnRing_2( cocos2d::Layer *layer)
 	layer->addChild( pointNode , 4 );
 
 	auto pointActionNode = MoveBy::create( SECOND_RING_MOVEMENT_SPEED * VisibleSize.width , Point( -VisibleSize.
-		width * 1.5 , 0 ));
+		width  , 0 ));
 
 	pointNode->runAction( pointActionNode );
 
@@ -78,8 +78,8 @@ void Ring_2::SpawnRing_2( cocos2d::Layer *layer)
 	layer->addChild( topRing , 3 );
 	layer->addChild( bottomRing , 1 );
 
-	auto topRingAction = MoveBy::create( (SECOND_RING_MOVEMENT_SPEED *  VisibleSize.width) , Point( -VisibleSize.width * 1.5 , 0 ));
-	auto bottomRingAction = MoveBy::create( SECOND_RING_MOVEMENT_SPEED * VisibleSize.width  , Point( -VisibleSize.width * 1.5 , 0 ));
+	auto topRingAction = MoveBy::create( (SECOND_RING_MOVEMENT_SPEED *  VisibleSize.width) , Point( -VisibleSize.width  , 0 ));
+	auto bottomRingAction = MoveBy::create( SECOND_RING_MOVEMENT_SPEED * VisibleSize.width  , Point( -VisibleSize.width  , 0 ));
 
 	topRing->runAction( topRingAction );
 	bottomRing->runAction( bottomRingAction );

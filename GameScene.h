@@ -34,7 +34,8 @@ private:
 
 	bool onTouchBegan( cocos2d::Touch *touch , cocos2d::Event *event);
 		
-
+	/*void stopFlying( float dt );
+	void update( float dt );*/
 
 	unsigned int score;
 

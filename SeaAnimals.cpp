@@ -12,33 +12,23 @@ SeaAnimals::SeaAnimals()
 
 void SeaAnimals::SpawnAnimals( cocos2d::Layer *layer)
 {
-	CCLOG("SPAWN ANIMALS");
 
 	auto backgroundSprite = Sprite::create("Background.png");
-
-
-	auto lobster = Sprite::create( "SeaAnimal_1.png" );
-	lobster->setScaleX(VisibleSize.width/backgroundSprite->getContentSize().width * 0.55);
-	lobster->setScaleY(VisibleSize.height/backgroundSprite->getContentSize().height * 1.50);
 	
-	auto lobsterBody = PhysicsBody::createBox(  Size( 10 , 15 ) );
-	lobsterBody->setDynamic( false );	
-	lobsterBody->setCollisionBitmask( LOBSTER_COLLISION_BITMASK );
-	lobsterBody->setContactTestBitmask( true );
-	lobster->setPhysicsBody( lobsterBody );
+	auto blue_fish = Sprite::create("blue_fish.png");
+	blue_fish->setScaleX(VisibleSize.width/backgroundSprite->getContentSize().width * 0.55);
+	blue_fish->setScaleY(VisibleSize.height/backgroundSprite->getContentSize().height * 1.50);
 
-	layer->addChild( lobster , 2 );
+	blue_fish->setPosition(	Point(	(VisibleSize.width + origin.x) * 1.2 ,	VisibleSize.height / 2	* 0.65 + origin.y	)	);
 
-	lobster->setPosition( Point( (VisibleSize.width   + origin.x) * 1.2  , VisibleSize.height / 2  * 0.80 + origin.y) );
+	auto blue_fish_Action = MoveBy::create( (FISH_MOVEMENT_SPEED *  VisibleSize.width) , Point( -VisibleSize.width * 1.2 , 0 ));
 
-	auto lobsterAction = MoveTo::create( (ANIMALS_MOVEMENT_SPEED *  VisibleSize.width) , Point( -VisibleSize.width * 1.5 , 0 ));
+	blue_fish->runAction(blue_fish_Action);
+	
+	layer->addChild( blue_fish ,2 );
 
-	auto UpDownAction = MoveBy::create( (ANIMALS_VERTICAL_MOVEMENT_SPEED *  VisibleSize.height) ,
-		Point (0 , VisibleSize.height/2 * 0.10  )  );
+	
+	
 
-
-	auto action = RepeatForever::create(Sequence::create(lobsterAction , UpDownAction , UpDownAction->reverse() ,  nullptr));
-
-	lobster->runAction( action  );
 
 }

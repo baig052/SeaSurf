@@ -27,10 +27,14 @@ private:
 
 	void SpawnRing( float dt );
 
+	void SpawnRing_2( float dt);
+
 	void SpawnAnimals( float dt );
 	
 	cocos2d::Size VisibleSize;
 	cocos2d::Vec2 origin;
+
+	~Hurdles();
 	
 
 };

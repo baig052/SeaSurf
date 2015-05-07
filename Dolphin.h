@@ -12,12 +12,23 @@ public:
 
 	void Jump() ;
 
+	//void Fall( );
+
+	//void Fly() {  //CocosDenshion::SimpleAudioEngine::getInstance()->playEffect( "Sounds/Wing.mp3" );
+	//isFalling = false ; }
+	//void stopFlying() { isFalling = true; } 
+
+
 		
 private:
 	cocos2d::Size VisibleSize;
 	cocos2d::Vec2 origin;
 
 	cocos2d::Sprite *dolphin;
+
+//	bool isFalling;
+
+	
 };
 
 #endif // __DOLPHIN_SCENE_H__

@@ -15,7 +15,7 @@ Dolphin::Dolphin( cocos2d::Layer *layer)
 	 dolphin = Sprite::create( "dolphin.png" );
 	dolphin->setScaleX(VisibleSize.width/backgroundSprite->getContentSize().width * co_ordX_dol);
 	dolphin->setScaleY(VisibleSize.height/backgroundSprite->getContentSize().height * co_ordY_dol);
-	dolphin->setPosition( Point( (VisibleSize.width   + origin.x) * 0.30, VisibleSize.height / 2 + origin.y ));
+	dolphin->setPosition( Point( (VisibleSize.width   + origin.x) * 0.30, VisibleSize.height / 2 * 0.96 + origin.y ));
 
 	auto dolphinBody = PhysicsBody::createCircle( dolphin->getContentSize().width / 7 );
 	
@@ -40,16 +40,20 @@ Dolphin::Dolphin( cocos2d::Layer *layer)
     auto action = Animate::create(animation);
 	auto seq  = Sequence::create( action , action->reverse() , nullptr);
 	dolphin->runAction(RepeatForever::create( seq ) );
+		//isFalling = true ;
+
+
+
 
 }
 
 void Dolphin::Jump()
 {	
-	auto rotateUp = RotateBy::create(0.3f, -45.0f);
-    auto actionUp = JumpBy::create( 1.3 , Vec2(0,0), 100, 1);
-	auto rotateStraight = RotateBy::create(0.2f , 45.0f);
+	auto rotateUp = RotateBy::create(0.2f, -45.0f);
+    auto actionUp = JumpBy::create( 1.2 , Vec2(0,0), 110, 1);
+	auto rotateStraight = RotateBy::create(0.3f , 45.0f);
 	auto rotateStraight_2 = RotateBy::create(0.2f , -45.0f);
-	auto rotateDown = RotateTo::create( 0.8f , 45.0f );
+	auto rotateDown = RotateTo::create( 0.7f , 45.0f );
 	auto group = Spawn::create(actionUp , rotateStraight , rotateDown  ,  nullptr );
 	
 	auto seq = Sequence::create( rotateUp , group ,rotateStraight_2,nullptr);
@@ -57,6 +61,20 @@ void Dolphin::Jump()
 	dolphin->runAction( seq );
 
 }
+
+//void Dolphin::Fall( )
+//{
+//	if( true == isFalling )
+//	{
+//		dolphin->setPositionX( VisibleSize.width / 2 +origin.x );
+//		dolphin->setPositionY( dolphin->getPositionY() - ( DOLPHIN_FALLING_SPEED * VisibleSize.height ));
+//	}
+//	else
+//	{
+//		dolphin->setPositionX( VisibleSize.width / 2 +origin.x );
+//		dolphin->setPositionY( dolphin->getPositionY() + ( DOLPHIN_FALLING_SPEED * VisibleSize.height ));
+//	}
+//}
 
 
 

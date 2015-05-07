@@ -26,7 +26,8 @@ bool Hurdles::init()
 	VisibleSize = Director::getInstance()->getVisibleSize();
     origin = Director::getInstance()->getVisibleOrigin();
 	
-	schedule( schedule_selector( Hurdles::SpawnRing ) , RING_SPAWN_FREQUENCY * VisibleSize.width );
+	schedule( schedule_selector( Hurdles::SpawnRing ) , RING_SPAWN_FREQUENCY * VisibleSize.width / 3 );
+	//schedule( schedule_selector( Hurdles::SpawnRing_2 ) , RING_SPAWN_FREQUENCY * VisibleSize.width  );
 	schedule( schedule_selector( Hurdles::SpawnAnimals) , ANIMALS_SPAWN_FREQUENCY * VisibleSize.width /2 );
 		
 	dol = new Dolphin(this);
@@ -43,13 +44,24 @@ void Hurdles::SpawnRing( float dt )
 	ring = new Ring () ; 
 	ring->SpawnRing( this );
 	Rptr = ring;
-	//ring_2 = new Ring_2();
-	//ring_2->SpawnRing_2( this );
+	
+}
+
+void Hurdles::SpawnRing_2(float dt)
+{
+	ring_2 = new Ring_2();
+	ring_2->SpawnRing_2( this );
 }
 void Hurdles::SpawnAnimals( float dt )
 {
 	sea_animals = new SeaAnimals();
 	sea_animals->SpawnAnimals( this );
+}
+
+Hurdles::~Hurdles()
+{
+	/*delete ring;
+	delete ring_2;*/
 }
 
 

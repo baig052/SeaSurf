@@ -84,6 +84,9 @@ bool GameScene::init()
 
 	this->addChild( scoreLabel , 6 );
 
+		//this->scheduleUpdate( );
+
+
 	
 
     return true;
@@ -135,7 +138,7 @@ bool GameScene::onContactBegin( cocos2d::PhysicsContact &contact )
 		 POINT_COLLISION_BITMASK ==	 a->getCollisionBitmask() ) )
 	{
 
-		Rptr->DeleteRing( this );
+		//delete Hurdles;
 		
 
 	}
@@ -156,12 +159,25 @@ bool GameScene::onTouchBegan( cocos2d::Touch *touch , cocos2d::Event *event)
 	if( jumpflag == true )
 	{
 		ptr->Jump();
+		//this->scheduleOnce( schedule_selector( GameScene::stopFlying) ,	DOLPHIN_FLY_DURATION );
+
 		jumpflag = false ;
 	
 	}
 	return true; 
 
 }
+
+//
+//void GameScene::stopFlying( float dt )
+//{
+//	ptr->stopFlying();
+//}
+//
+//void GameScene::update( float dt )
+//{
+//	ptr->Fall();
+//}
 
 
 

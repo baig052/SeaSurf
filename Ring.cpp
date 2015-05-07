@@ -10,17 +10,10 @@ Ring::Ring()
 	VisibleSize = Director::getInstance()->getVisibleSize();
 	origin = Director::getInstance()->getVisibleOrigin();
 }
-
-void Ring::DeleteRing( cocos2d::Layer *layer)
+Ring::~Ring()
 {
-	layer->removeChildByName("UpperNode");
-	layer->removeChildByName("BottomNode");
-	layer->removeChildByName("PointNode");
-	layer->removeChildByName("TopRing");
-	layer->removeChildByName("BottomRing");
-	layer->removeChildByName("DeletionNode");
-
 }
+
 
 void Ring::SpawnRing( cocos2d::Layer *layer)
 {
