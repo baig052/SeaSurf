@@ -3,6 +3,7 @@
 #include "MainMenuScene.h"
 
 
+
 USING_NS_CC;
 
 Dolphin::Dolphin( cocos2d::Layer *layer)
@@ -15,9 +16,9 @@ Dolphin::Dolphin( cocos2d::Layer *layer)
 	 dolphin = Sprite::create( "dolphin.png" );
 	dolphin->setScaleX(VisibleSize.width/backgroundSprite->getContentSize().width * co_ordX_dol);
 	dolphin->setScaleY(VisibleSize.height/backgroundSprite->getContentSize().height * co_ordY_dol);
-	dolphin->setPosition( Point( (VisibleSize.width   + origin.x) * 0.30, VisibleSize.height / 2 * 0.96 + origin.y ));
+	dolphin->setPosition( Point( (VisibleSize.width   + origin.x) * 0.30, VisibleSize.height / 2 * 0.94 + origin.y ));
 
-	auto dolphinBody = PhysicsBody::createCircle( dolphin->getContentSize().width / 7 );
+	auto dolphinBody = PhysicsBody::createCircle( dolphin->getContentSize().width / 13 );
 	
 	dolphinBody->setCollisionBitmask( DOLPHIN_COLLISION_BITMASK );
 	dolphinBody->setContactTestBitmask( true );
@@ -27,7 +28,7 @@ Dolphin::Dolphin( cocos2d::Layer *layer)
 
 	layer->addChild( dolphin , 3 );
 
-	auto animation = Animation::create();
+	animation = Animation::create();
     for( int i=1 ; i < 4 ; i++ )
     {
         char szName[100] = {0};
@@ -49,32 +50,20 @@ Dolphin::Dolphin( cocos2d::Layer *layer)
 
 void Dolphin::Jump()
 {	
-	auto rotateUp = RotateBy::create(0.2f, -45.0f);
-    auto actionUp = JumpBy::create( 1.2 , Vec2(0,0), 110, 1);
+	auto rotateUp = RotateBy::create(0.1f, -60.0f);
+    auto actionUp = JumpBy::create( 1.0 , Vec2(0,0), 90, 1);
 	auto rotateStraight = RotateBy::create(0.3f , 45.0f);
-	auto rotateStraight_2 = RotateBy::create(0.2f , -45.0f);
-	auto rotateDown = RotateTo::create( 0.7f , 45.0f );
-	auto group = Spawn::create(actionUp , rotateStraight , rotateDown  ,  nullptr );
+	auto rotateStraight_2 = RotateBy::create(0.1f , -45.0f);
+	auto rotateDown = RotateTo::create( 0.5f , 45.0f );
+	auto group = Spawn::create(  actionUp , rotateStraight , rotateDown  ,  nullptr );
 	
-	auto seq = Sequence::create( rotateUp , group ,rotateStraight_2,nullptr);
+	auto seq = Sequence::create( rotateUp ,  group , rotateStraight_2 , nullptr);
+
      
 	dolphin->runAction( seq );
 
 }
 
-//void Dolphin::Fall( )
-//{
-//	if( true == isFalling )
-//	{
-//		dolphin->setPositionX( VisibleSize.width / 2 +origin.x );
-//		dolphin->setPositionY( dolphin->getPositionY() - ( DOLPHIN_FALLING_SPEED * VisibleSize.height ));
-//	}
-//	else
-//	{
-//		dolphin->setPositionX( VisibleSize.width / 2 +origin.x );
-//		dolphin->setPositionY( dolphin->getPositionY() + ( DOLPHIN_FALLING_SPEED * VisibleSize.height ));
-//	}
-//}
 
 
 

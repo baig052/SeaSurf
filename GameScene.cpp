@@ -5,11 +5,13 @@
 #include "Dolphin.h"
 #include "Hurdles.h"
 #include "Ring.h"
+#include "SeaAnimals.h"
 
 USING_NS_CC;
 
 extern Dolphin *ptr;
 extern Ring *Rptr;
+extern SeaAnimals *Sptr;
 		
 Scene* GameScene::createScene()
 {
@@ -30,6 +32,7 @@ Scene* GameScene::createScene()
 	auto Water_layer = Water::create();
 	scene->addChild( Water_layer , 2);
 
+
     // return the scene
     return scene;
 }
@@ -44,12 +47,10 @@ bool GameScene::init()
         return false;
     }
     
-    Size visibleSize = Director::getInstance()->getVisibleSize();
-    Vec2 origin = Director::getInstance()->getVisibleOrigin();
+    visibleSize = Director::getInstance()->getVisibleSize();
+    origin = Director::getInstance()->getVisibleOrigin();
 
-	
-
-	auto backgroundSprite = Sprite::create("sky.png");
+	backgroundSprite = Sprite::create("sky.png");
 	backgroundSprite->setPosition( Point( visibleSize.width / 2 + origin.x , visibleSize.height / 2 + origin.y ) );
 	this->addChild( backgroundSprite , 1);
 
@@ -106,13 +107,14 @@ bool GameScene::onContactBegin( cocos2d::PhysicsContact &contact )
 		LOWER_RING_COLLISION_BITMASK == a->getCollisionBitmask() ))
 	{
 		//CocosDenshion::SimpleAudioEngine::getInstance()->playEffect( "Sounds/Hit.mp3" );
+		
 
 		auto scene = GameOverScene::createScene( score );
 
 		Director::getInstance()->replaceScene( TransitionFade::create( TRANSITION_TIME , scene ) );
 
 	}
-	 if( ( DOLPHIN_COLLISION_BITMASK == a->getCollisionBitmask() && POINT_COLLISION_BITMASK == 
+	else if( ( DOLPHIN_COLLISION_BITMASK == a->getCollisionBitmask() && POINT_COLLISION_BITMASK == 
 		b->getCollisionBitmask() ) || ( DOLPHIN_COLLISION_BITMASK == b->getCollisionBitmask() && 
 		POINT_COLLISION_BITMASK == a->getCollisionBitmask() ) )
 	{
@@ -126,23 +128,56 @@ bool GameScene::onContactBegin( cocos2d::PhysicsContact &contact )
 
 	}
 	
-	 if( (DOLPHIN_COLLISION_BITMASK == a->getCollisionBitmask() && WATER_COLLISION_BITMASK == 
+	else if( (DOLPHIN_COLLISION_BITMASK == a->getCollisionBitmask() && WATER_COLLISION_BITMASK == 
 		 b->getCollisionBitmask() ) || ( DOLPHIN_COLLISION_BITMASK == b->getCollisionBitmask() &&
 		 WATER_COLLISION_BITMASK == a->getCollisionBitmask() ) )
 	 {
+		 
+
 		 jumpflag = true ;
-		
+
+		ripple = Sprite::create("ripple-1.png");
+		ripple->setScaleX(visibleSize.width/backgroundSprite->getContentSize().width * 1.20);
+		ripple->setScaleY(visibleSize.height/backgroundSprite->getContentSize().height * 0.70 );
+		ripple->setPosition( Point( (visibleSize.width   + origin.x) * 0.30, visibleSize.height / 2 * 0.92 + origin.y ));
+
+		this->addChild( ripple , 5);
+
+		auto animation = Animation::create();
+		for( int i=1 ; i < 10 ; i++ )
+		{
+			char szName[100] = {0};
+			sprintf(szName, "ripple/ripple-%00d.png", i);
+			animation->addSpriteFrameWithFile(szName);
+		}
+		animation->setDelayPerUnit( 2.0f / 9.0f );
+		animation->setRestoreOriginalFrame(false);
+
+		auto action = Animate::create(animation);
+		auto seq  = Sequence::create( action , nullptr);
+		ripple->runAction( seq );
 	 }
-	 if(( DELETION_COLLISION_BITMASK == a->getCollisionBitmask() && POINT_COLLISION_BITMASK ==
+
+	else if(( DELETION_COLLISION_BITMASK == a->getCollisionBitmask() && POINT_COLLISION_BITMASK ==
 		 b->getCollisionBitmask() ) || ( DELETION_COLLISION_BITMASK == b->getCollisionBitmask() &&
 		 POINT_COLLISION_BITMASK ==	 a->getCollisionBitmask() ) )
 	{
 
-		//delete Hurdles;
-		
+		delete Rptr;
+		Rptr = NULL;
+		delete Sptr;
+		Sptr = NULL;
 
 	}
 
+	 if( (DOLPHIN_COLLISION_BITMASK == a->getCollisionBitmask() && SNAKE_COLLISION_BITMASK == 
+		 b->getCollisionBitmask() ) || ( DOLPHIN_COLLISION_BITMASK == b->getCollisionBitmask() &&
+		 SNAKE_COLLISION_BITMASK == a->getCollisionBitmask() ) )
+	 {
+		 auto scene = GameOverScene::createScene( score );
+
+		Director::getInstance()->replaceScene( TransitionFade::create( TRANSITION_TIME , scene ) );
+	 }
 		 
 		 
 
@@ -153,14 +188,14 @@ bool GameScene::onContactBegin( cocos2d::PhysicsContact &contact )
 
 
 
+
 bool GameScene::onTouchBegan( cocos2d::Touch *touch , cocos2d::Event *event)
 {
+
 
 	if( jumpflag == true )
 	{
 		ptr->Jump();
-		//this->scheduleOnce( schedule_selector( GameScene::stopFlying) ,	DOLPHIN_FLY_DURATION );
-
 		jumpflag = false ;
 	
 	}
@@ -168,16 +203,7 @@ bool GameScene::onTouchBegan( cocos2d::Touch *touch , cocos2d::Event *event)
 
 }
 
-//
-//void GameScene::stopFlying( float dt )
-//{
-//	ptr->stopFlying();
-//}
-//
-//void GameScene::update( float dt )
-//{
-//	ptr->Fall();
-//}
+
 
 
 

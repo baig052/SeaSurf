@@ -25,6 +25,14 @@ public:
 
 
 private:
+	cocos2d::Size visibleSize;
+	cocos2d::Vec2 origin;
+
+	cocos2d::Sprite *backgroundSprite;
+
+
+	cocos2d::Sprite *ripple;
+	cocos2d::Animation *animation;
 
 	cocos2d::PhysicsWorld *sceneWorld;
 

@@ -13,6 +13,9 @@ public:
 private:
 	cocos2d::Size VisibleSize;
 	cocos2d::Vec2 origin;
+
+	cocos2d::Sprite *backgroundSprite;
+
 };
 
 #endif // __RING_SCENE_H__

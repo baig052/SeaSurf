@@ -4,16 +4,28 @@
 
 USING_NS_CC;
 
+
+
 SeaAnimals::SeaAnimals()
 {
 	VisibleSize = Director::getInstance()->getVisibleSize();
 	origin = Director::getInstance()->getVisibleOrigin();
+
 }
 
 void SeaAnimals::SpawnAnimals( cocos2d::Layer *layer)
 {
 
 	auto backgroundSprite = Sprite::create("Background.png");
+	a = 2.8 ;
+	rand_1 = ((float)rand()/(float)(RAND_MAX)) * a;
+	while( rand_1 < 1.2000 )
+	{
+		rand_1 = ((float)rand()/(float)(RAND_MAX)) * a;
+
+	}
+	a = 2;
+	rand_2 = ((float)rand()/(float)(RAND_MAX)) * a;
 	
 	auto blue_fish = Sprite::create("blue_fish.png");
 	blue_fish->setScaleX(VisibleSize.width/backgroundSprite->getContentSize().width * 0.55);
@@ -21,14 +33,73 @@ void SeaAnimals::SpawnAnimals( cocos2d::Layer *layer)
 
 	blue_fish->setPosition(	Point(	(VisibleSize.width + origin.x) * 1.2 ,	VisibleSize.height / 2	* 0.65 + origin.y	)	);
 
-	auto blue_fish_Action = MoveBy::create( (FISH_MOVEMENT_SPEED *  VisibleSize.width) , Point( -VisibleSize.width * 1.2 , 0 ));
+	auto blue_fish_Action = MoveBy::create( (FISH_MOVEMENT_SPEED *  VisibleSize.width) , Point( -VisibleSize.width * rand_2 , 0 ));
 
 	blue_fish->runAction(blue_fish_Action);
 	
 	layer->addChild( blue_fish ,2 );
 
+	auto gold_fish = Sprite::create("goldfish_2.png");
+	gold_fish->setScaleX(VisibleSize.width/backgroundSprite->getContentSize().width * 0.55);
+	gold_fish->setScaleY(VisibleSize.height/backgroundSprite->getContentSize().height * 1.50);
+
+	gold_fish->setPosition(	Point(	(VisibleSize.width + origin.x)  ,	VisibleSize.height / 2	* 0.50 + origin.y	)	);
+
+	auto gold_fish_Action = MoveTo::create( (FISH_MOVEMENT_SPEED *  VisibleSize.width) , Point( -VisibleSize.width * 1.50 , 0 ));
+
+	gold_fish->runAction(gold_fish_Action);
 	
-	
+	layer->addChild( gold_fish ,2 );
 
 
+	auto seahorse = Sprite::create("sea_horse.png");
+	seahorse->setScaleX(VisibleSize.width/backgroundSprite->getContentSize().width * 0.55);
+	seahorse->setScaleY(VisibleSize.height/backgroundSprite->getContentSize().height * 1.50);
+
+	seahorse->setPosition(	Point(	(VisibleSize.width + origin.x) * 1.5 ,	VisibleSize.height / 2	* 0.20 + origin.y	)	);
+
+	auto seahorse_Action = MoveBy::create( (FISH_MOVEMENT_SPEED *  VisibleSize.width) , Point( -VisibleSize.width * rand_2  , 0 ));
+
+	seahorse->runAction(seahorse_Action);
+	
+	layer->addChild( seahorse ,2 );
+
+	
+	 
+	snake= CCSprite::create("snake-1.png");
+	snake->setScaleX(VisibleSize.width/backgroundSprite->getContentSize().width * 0.56);
+	snake->setScaleY(VisibleSize.height/backgroundSprite->getContentSize().height * 1.50);
+
+	snake->setPosition( Point( (VisibleSize.width   + origin.x) * 1.50, VisibleSize.height / 2 * 0.91 + origin.y ) );
+
+	snakeBody = PhysicsBody::createBox( Size ( 1 , 1 ) );
+
+	snakeBody->setCollisionBitmask( SNAKE_COLLISION_BITMASK );
+	snakeBody->setContactTestBitmask( true );
+
+	snake->setPhysicsBody( snakeBody );
+
+
+	auto snake_Action = MoveBy::create( (SNAKE_MOVEMENT_SPEED * VisibleSize.width ) , Point( -VisibleSize.width * rand_1 , 0 ));
+
+	layer->addChild(snake , 5);
+
+	animation = Animation::create();
+    for( int i=1 ; i < 11 ; i++ )
+    {
+        char szName[100] = {0};
+        sprintf(szName, "snake/snake-%00d.png", i);
+        animation->addSpriteFrameWithFile(szName);
+    }
+    animation->setDelayPerUnit( 1.0f / 11.0f );
+	animation->setRestoreOriginalFrame(false);
+
+    auto action = Animate::create(animation);
+	auto seq  = Sequence::create( action , nullptr);
+	snake->runAction(RepeatForever::create( seq ) );
+
+	snake->runAction( snake_Action );
+
+	
 }
+

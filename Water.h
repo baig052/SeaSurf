@@ -4,7 +4,6 @@
 #include "cocos2d.h"
 
 
-
 class Water : public cocos2d::Layer
 {
 public:
@@ -14,6 +13,9 @@ public:
 	CREATE_FUNC(Water);
 	
 private:
+	cocos2d::Sprite *backgroundSprite;
+	cocos2d::Sprite *ripple;
+
 	void update( float dt );
 	cocos2d::CCSprite *Water1;
 	cocos2d::CCSprite *Water2;

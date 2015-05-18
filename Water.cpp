@@ -1,7 +1,10 @@
 #include "Water.h"
 #include "Definitions.h"
+#include "MainMenuScene.h"
 
 USING_NS_CC;
+
+
 
 bool Water::init()
 {
@@ -14,7 +17,31 @@ bool Water::init()
 	VisibleSize = Director::getInstance()->getVisibleSize();
     origin = Director::getInstance()->getVisibleOrigin();
 
-	auto backgroundSprite = Sprite::create("background.png");
+	backgroundSprite = Sprite::create("background.png");
+
+	ripple = Sprite::create("ripple-1.png");
+	ripple->setScaleX(VisibleSize.width/backgroundSprite->getContentSize().width * 0.40);
+	ripple->setScaleY(VisibleSize.height/backgroundSprite->getContentSize().height * 1.40);
+	ripple->setPosition( Point( (VisibleSize.width   + origin.x) * 0.30, VisibleSize.height / 2 * 0.92 + origin.y ));
+
+	this->addChild( ripple , 5);
+
+	auto animation = Animation::create();
+	for( int i=1 ; i < 10 ; i++ )
+	{
+		char szName[100] = {0};
+		sprintf(szName, "ripple/ripple-%00d.png", i);
+		animation->addSpriteFrameWithFile(szName);
+	}
+	animation->setDelayPerUnit( 2.0f / 9.0f );
+	animation->setRestoreOriginalFrame(false);
+
+	auto action = Animate::create(animation);
+	auto seq  = Sequence::create( action , nullptr);
+	ripple->runAction( RepeatForever::create(seq) );
+
+	
+
 
 	Water1 = CCSprite::create("water_new.png");
 	Water1->setScaleX(VisibleSize.width/backgroundSprite->getContentSize().width * 0.55);
@@ -45,7 +72,6 @@ bool Water::init()
 	pointNode->setPosition(Point( (VisibleSize.width   + origin.x) * 0.30  , VisibleSize.height  * 0.48 + origin.y) );
 
 	this->addChild( pointNode , 3 );
-
 	
 
 	//auto water_action = MoveBy::create( (WATER_FLOW_SPEED * VisibleSize.width) , -Point(VisibleSize.width , 0));

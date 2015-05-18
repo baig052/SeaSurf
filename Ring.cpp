@@ -9,30 +9,32 @@ Ring::Ring()
 {
 	VisibleSize = Director::getInstance()->getVisibleSize();
 	origin = Director::getInstance()->getVisibleOrigin();
+	backgroundSprite = Sprite::create("Background.png");
+
 }
 Ring::~Ring()
 {
+
 }
 
 
 void Ring::SpawnRing( cocos2d::Layer *layer)
 {
 	CCLOG("SPAWN RING");
-	 auto backgroundSprite = Sprite::create("Background.png");
 
 
 	auto topRing = Sprite::create( "TopRing.png" );
-	//topRing->setScaleX(VisibleSize.width/backgroundSprite->getContentSize().width * co_ordX);
-	//topRing->setScaleY(VisibleSize.height/backgroundSprite->getContentSize().height * co_ordY);
+	topRing->setScaleX(VisibleSize.width/backgroundSprite->getContentSize().width * co_ordX);
+	topRing->setScaleY(VisibleSize.height/backgroundSprite->getContentSize().height * co_ordY);
 
 	auto bottomRing = Sprite::create( "BottomRing.png" );
-	//bottomRing->setScaleX(VisibleSize.width/backgroundSprite->getContentSize().width * co_ordX);
-	//bottomRing->setScaleY(VisibleSize.height/backgroundSprite->getContentSize().height * co_ordY);
+	bottomRing->setScaleX(VisibleSize.width/backgroundSprite->getContentSize().width * co_ordX);
+	bottomRing->setScaleY(VisibleSize.height/backgroundSprite->getContentSize().height * co_ordY);
 
 
 
 	auto topNode = Node::create();
-	auto RingtopBody = PhysicsBody::createBox(  Size( 10 , 15 ) );
+	auto RingtopBody = PhysicsBody::createBox(  Size( 10 , 5 ) );
 	RingtopBody->setDynamic( false );	
 	RingtopBody->setCollisionBitmask( UPPER_RING_COLLISION_BITMASK );
 	RingtopBody->setContactTestBitmask( true );
@@ -49,7 +51,7 @@ void Ring::SpawnRing( cocos2d::Layer *layer)
 
 
 	auto bottomNode = Node::create();
-	auto RingbottomBody = PhysicsBody::createBox(  Size( 10 , 15 ) );
+	auto RingbottomBody = PhysicsBody::createBox(  Size( 10 , 5 ) );
 	RingbottomBody->setDynamic( false );	
 	RingbottomBody->setCollisionBitmask( UPPER_RING_COLLISION_BITMASK );
 	RingbottomBody->setContactTestBitmask( true );
@@ -66,7 +68,7 @@ void Ring::SpawnRing( cocos2d::Layer *layer)
 
 	
 	auto pointNode = Node::create();
-	auto pointBody = PhysicsBody::createBox( Size( 5, 5) ) ;
+	auto pointBody = PhysicsBody::createBox( Size( 0, 0) ) ;
 
 	pointBody->setDynamic( true );
 	pointBody->setCollisionBitmask( POINT_COLLISION_BITMASK );
@@ -97,7 +99,7 @@ void Ring::SpawnRing( cocos2d::Layer *layer)
 	bottomRing->runAction( bottomRingAction );
 
 	auto DeletionNode = Node::create();
-	auto DeletionBody = PhysicsBody::createBox( Size( 25, 4) ) ;
+	auto DeletionBody = PhysicsBody::createBox( Size( 0, 0) ) ;
 
 	DeletionBody->setDynamic( true );
 	DeletionBody->setCollisionBitmask( DELETION_COLLISION_BITMASK );

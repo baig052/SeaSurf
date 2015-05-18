@@ -26,6 +26,8 @@ private:
 
 	cocos2d::Sprite *dolphin;
 
+	cocos2d::Animation *animation;
+
 //	bool isFalling;
 
 	

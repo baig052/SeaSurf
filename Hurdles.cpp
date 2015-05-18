@@ -3,6 +3,7 @@
 #include "GameScene.h"
 #include "Dolphin.h"
 #include "Ring.h"
+#include "SeaAnimals.h"
 
 
 USING_NS_CC;
@@ -14,6 +15,8 @@ Ring *Rptr;
 static Dolphin *dol;
 
 Dolphin *ptr;
+
+SeaAnimals *Sptr;
  
 bool Hurdles::init()
 {
@@ -27,7 +30,6 @@ bool Hurdles::init()
     origin = Director::getInstance()->getVisibleOrigin();
 	
 	schedule( schedule_selector( Hurdles::SpawnRing ) , RING_SPAWN_FREQUENCY * VisibleSize.width / 3 );
-	//schedule( schedule_selector( Hurdles::SpawnRing_2 ) , RING_SPAWN_FREQUENCY * VisibleSize.width  );
 	schedule( schedule_selector( Hurdles::SpawnAnimals) , ANIMALS_SPAWN_FREQUENCY * VisibleSize.width /2 );
 		
 	dol = new Dolphin(this);
@@ -47,15 +49,12 @@ void Hurdles::SpawnRing( float dt )
 	
 }
 
-void Hurdles::SpawnRing_2(float dt)
-{
-	ring_2 = new Ring_2();
-	ring_2->SpawnRing_2( this );
-}
+
 void Hurdles::SpawnAnimals( float dt )
 {
 	sea_animals = new SeaAnimals();
 	sea_animals->SpawnAnimals( this );
+	Sptr = sea_animals;
 }
 
 Hurdles::~Hurdles()
