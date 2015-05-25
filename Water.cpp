@@ -26,7 +26,7 @@ bool Water::init()
 
 	this->addChild( ripple , 5);
 
-	auto animation = Animation::create();
+	animation = Animation::create();
 	for( int i=1 ; i < 10 ; i++ )
 	{
 		char szName[100] = {0};
@@ -36,7 +36,7 @@ bool Water::init()
 	animation->setDelayPerUnit( 2.0f / 9.0f );
 	animation->setRestoreOriginalFrame(false);
 
-	auto action = Animate::create(animation);
+	action = Animate::create(animation);
 	auto seq  = Sequence::create( action , nullptr);
 	ripple->runAction( RepeatForever::create(seq) );
 

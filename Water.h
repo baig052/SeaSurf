@@ -12,9 +12,14 @@ public:
 	
 	CREATE_FUNC(Water);
 	
+
+	
 private:
 	cocos2d::Sprite *backgroundSprite;
 	cocos2d::Sprite *ripple;
+
+	cocos2d::Animation *animation;
+	cocos2d::Animate *action;
 
 	void update( float dt );
 	cocos2d::CCSprite *Water1;

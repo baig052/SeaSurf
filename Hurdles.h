@@ -3,7 +3,6 @@
 
 #include "cocos2d.h"
 #include "Ring.h"
-#include "Ring_2.h"
 #include "Hurdles.h"
 #include "Dolphin.h"
 #include "SeaAnimals.h"
@@ -18,8 +17,6 @@ public:
 	CREATE_FUNC(Hurdles);
 
 private:	
-
-	Ring_2 *ring_2;
 
 	cocos2d::Layer *templayer;
 

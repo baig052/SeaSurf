@@ -18,7 +18,8 @@ Dolphin::Dolphin( cocos2d::Layer *layer)
 	dolphin->setScaleY(VisibleSize.height/backgroundSprite->getContentSize().height * co_ordY_dol);
 	dolphin->setPosition( Point( (VisibleSize.width   + origin.x) * 0.30, VisibleSize.height / 2 * 0.94 + origin.y ));
 
-	auto dolphinBody = PhysicsBody::createCircle( dolphin->getContentSize().width / 13 );
+
+	auto dolphinBody = PhysicsBody::createCircle(dolphin->getContentSize().width / 2 * 0.11 );
 	
 	dolphinBody->setCollisionBitmask( DOLPHIN_COLLISION_BITMASK );
 	dolphinBody->setContactTestBitmask( true );
@@ -41,17 +42,13 @@ Dolphin::Dolphin( cocos2d::Layer *layer)
     auto action = Animate::create(animation);
 	auto seq  = Sequence::create( action , action->reverse() , nullptr);
 	dolphin->runAction(RepeatForever::create( seq ) );
-		//isFalling = true ;
-
-
-
 
 }
 
 void Dolphin::Jump()
 {	
 	auto rotateUp = RotateBy::create(0.1f, -60.0f);
-    auto actionUp = JumpBy::create( 1.0 , Vec2(0,0), 90, 1);
+    auto actionUp = JumpBy::create( 1.0 , Vec2(0,0), 85, 1);
 	auto rotateStraight = RotateBy::create(0.3f , 45.0f);
 	auto rotateStraight_2 = RotateBy::create(0.1f , -45.0f);
 	auto rotateDown = RotateTo::create( 0.5f , 45.0f );
@@ -59,7 +56,6 @@ void Dolphin::Jump()
 	
 	auto seq = Sequence::create( rotateUp ,  group , rotateStraight_2 , nullptr);
 
-     
 	dolphin->runAction( seq );
 
 }

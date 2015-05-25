@@ -49,6 +49,7 @@ bool GameScene::init()
     
     visibleSize = Director::getInstance()->getVisibleSize();
     origin = Director::getInstance()->getVisibleOrigin();
+	auto backp = Sprite::create("background.png");
 
 	backgroundSprite = Sprite::create("sky.png");
 	backgroundSprite->setPosition( Point( visibleSize.width / 2 + origin.x , visibleSize.height / 2 + origin.y ) );
@@ -57,7 +58,6 @@ bool GameScene::init()
 		jumpflag = true ;
 
 	
-
 	auto contactListener = EventListenerPhysicsContact::create();
 	contactListener->onContactBegin = CC_CALLBACK_1( GameScene::onContactBegin , this );
 	Director::getInstance()->getEventDispatcher()->addEventListenerWithSceneGraphPriority(
@@ -85,11 +85,6 @@ bool GameScene::init()
 
 	this->addChild( scoreLabel , 6 );
 
-		//this->scheduleUpdate( );
-
-
-	
-
     return true;
 }
 
@@ -106,7 +101,7 @@ bool GameScene::onContactBegin( cocos2d::PhysicsContact &contact )
 		b->getCollisionBitmask() ) || (DOLPHIN_COLLISION_BITMASK == b->getCollisionBitmask() && 
 		LOWER_RING_COLLISION_BITMASK == a->getCollisionBitmask() ))
 	{
-		//CocosDenshion::SimpleAudioEngine::getInstance()->playEffect( "Sounds/Hit.mp3" );
+		CocosDenshion::SimpleAudioEngine::getInstance()->playEffect( "Sounds/Hit.mp3" );
 		
 
 		auto scene = GameOverScene::createScene( score );
@@ -118,7 +113,7 @@ bool GameScene::onContactBegin( cocos2d::PhysicsContact &contact )
 		b->getCollisionBitmask() ) || ( DOLPHIN_COLLISION_BITMASK == b->getCollisionBitmask() && 
 		POINT_COLLISION_BITMASK == a->getCollisionBitmask() ) )
 	{
-		//CocosDenshion::SimpleAudioEngine::getInstance()->playEffect( "Sounds/Point.mp3" );
+		CocosDenshion::SimpleAudioEngine::getInstance()->playEffect( "Sounds/Point.mp3" );
 
 		score++;
 
@@ -132,7 +127,6 @@ bool GameScene::onContactBegin( cocos2d::PhysicsContact &contact )
 		 b->getCollisionBitmask() ) || ( DOLPHIN_COLLISION_BITMASK == b->getCollisionBitmask() &&
 		 WATER_COLLISION_BITMASK == a->getCollisionBitmask() ) )
 	 {
-		 
 
 		 jumpflag = true ;
 
@@ -162,25 +156,35 @@ bool GameScene::onContactBegin( cocos2d::PhysicsContact &contact )
 		 b->getCollisionBitmask() ) || ( DELETION_COLLISION_BITMASK == b->getCollisionBitmask() &&
 		 POINT_COLLISION_BITMASK ==	 a->getCollisionBitmask() ) )
 	{
-
-		delete Rptr;
-		Rptr = NULL;
-		delete Sptr;
-		Sptr = NULL;
+		//delete Rptr;
+		Rptr->topRing->autorelease();
+		Rptr->bottomRing->autorelease();
+		Rptr->topNode->autorelease();
+		Rptr->bottomNode->autorelease();
+		Rptr->pointNode->autorelease();
 
 	}
 
-	 if( (DOLPHIN_COLLISION_BITMASK == a->getCollisionBitmask() && SNAKE_COLLISION_BITMASK == 
-		 b->getCollisionBitmask() ) || ( DOLPHIN_COLLISION_BITMASK == b->getCollisionBitmask() &&
-		 SNAKE_COLLISION_BITMASK == a->getCollisionBitmask() ) )
-	 {
-		 auto scene = GameOverScene::createScene( score );
+		if( (DOLPHIN_COLLISION_BITMASK == a->getCollisionBitmask() && SNAKE_COLLISION_BITMASK == 
+			b->getCollisionBitmask() ) || ( DOLPHIN_COLLISION_BITMASK == b->getCollisionBitmask() &&
+			SNAKE_COLLISION_BITMASK == a->getCollisionBitmask() ) )
+		{
 
-		Director::getInstance()->replaceScene( TransitionFade::create( TRANSITION_TIME , scene ) );
-	 }
-		 
-		 
+			CocosDenshion::SimpleAudioEngine::getInstance()->playEffect( "Sounds/Hit.mp3" );
 
+			auto scene = GameOverScene::createScene( score );
+
+			Director::getInstance()->replaceScene( TransitionFade::create( TRANSITION_TIME , scene ) );
+		}
+
+		if( a->getNode()->getTag() == SNAKE_TAG || b->getNode()->getTag() == DELETE_TAG )
+		{
+			a->getNode()->removeFromParentAndCleanup(true);
+		}
+		else if( b->getNode()->getTag () == SNAKE_TAG  || a->getNode()->getTag() == DELETE_TAG )
+		{
+			b->getNode()->removeFromParentAndCleanup(true);
+		}
 
 	return true;
 }

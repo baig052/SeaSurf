@@ -33,6 +33,9 @@ bool MainMenuScene::init()
         return false;
     }
 
+	CocosDenshion::SimpleAudioEngine::getInstance()->preloadEffect("Sounds/Hit.mp3");
+	CocosDenshion::SimpleAudioEngine::getInstance()->preloadEffect("Sounds/Point.mp3");
+
 	
 
     Size visibleSize = Director::getInstance()->getVisibleSize();

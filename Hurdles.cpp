@@ -15,6 +15,7 @@ Ring *Rptr;
 static Dolphin *dol;
 
 Dolphin *ptr;
+static SeaAnimals *sea_animals;
 
 SeaAnimals *Sptr;
  
@@ -32,6 +33,7 @@ bool Hurdles::init()
 	schedule( schedule_selector( Hurdles::SpawnRing ) , RING_SPAWN_FREQUENCY * VisibleSize.width / 3 );
 	schedule( schedule_selector( Hurdles::SpawnAnimals) , ANIMALS_SPAWN_FREQUENCY * VisibleSize.width /2 );
 		
+
 	dol = new Dolphin(this);
 	ptr = dol;
 
@@ -59,8 +61,7 @@ void Hurdles::SpawnAnimals( float dt )
 
 Hurdles::~Hurdles()
 {
-	/*delete ring;
-	delete ring_2;*/
+	
 }
 
 
