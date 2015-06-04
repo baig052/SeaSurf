@@ -17,7 +17,7 @@ bool Water::init()
 	VisibleSize = Director::getInstance()->getVisibleSize();
     origin = Director::getInstance()->getVisibleOrigin();
 
-	backgroundSprite = Sprite::create("background.png");
+	backgroundSprite = Sprite::create("Background.png");
 
 	ripple = Sprite::create("ripple-1.png");
 	ripple->setScaleX(VisibleSize.width/backgroundSprite->getContentSize().width * 0.40);
@@ -43,7 +43,7 @@ bool Water::init()
 	
 
 
-	Water1 = CCSprite::create("water_new.png");
+	Water1 = Sprite::create("water_new.png");
 	Water1->setScaleX(VisibleSize.width/backgroundSprite->getContentSize().width * 0.55);
 	Water1->setScaleY(VisibleSize.height/backgroundSprite->getContentSize().height * 1.75);
 
@@ -51,7 +51,7 @@ bool Water::init()
 	Water1->setPosition(ccp(VisibleSize.width*0.0, VisibleSize.height*0));
 	 this-> addChild(Water1, 4);
 
-	Water2 = CCSprite::create("water_new.png");
+	Water2 = Sprite::create("water_new.png");
 	Water2->setAnchorPoint(ccp(0, 0));
 	Water2->setPosition(ccp(0 - Water2->getContentSize().width, VisibleSize.height*0));
 
@@ -77,7 +77,7 @@ bool Water::init()
 	//auto water_action = MoveBy::create( (WATER_FLOW_SPEED * VisibleSize.width) , -Point(VisibleSize.width , 0));
 
 	//waterSprite->runAction(water_action);
-	plant_1= CCSprite::create("bottom_plants.png");
+	plant_1= Sprite::create("bottom_plants.png");
 	plant_1->setScaleX(VisibleSize.width/backgroundSprite->getContentSize().width * 0.56);
 	plant_1->setScaleY(VisibleSize.height/backgroundSprite->getContentSize().height * 1.50);
 
@@ -85,7 +85,7 @@ bool Water::init()
 	plant_1->setPosition(ccp(0 - plant_1->getContentSize().width, VisibleSize.height*0));
 	this->addChild(plant_1 , 5);
 
-	plant_2 = CCSprite::create("bottom_plants.png");
+	plant_2 = Sprite::create("bottom_plants.png");
 	plant_2->setScaleX(VisibleSize.width/backgroundSprite->getContentSize().width * 0.56);
 	plant_2->setScaleY(VisibleSize.height/backgroundSprite->getContentSize().height * 1.50);
 

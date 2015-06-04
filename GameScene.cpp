@@ -49,7 +49,7 @@ bool GameScene::init()
     
     visibleSize = Director::getInstance()->getVisibleSize();
     origin = Director::getInstance()->getVisibleOrigin();
-	auto backp = Sprite::create("background.png");
+	auto backp = Sprite::create("Background.png");
 
 	backgroundSprite = Sprite::create("sky.png");
 	backgroundSprite->setPosition( Point( visibleSize.width / 2 + origin.x , visibleSize.height / 2 + origin.y ) );

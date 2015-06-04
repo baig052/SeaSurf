@@ -20,7 +20,6 @@ Ring::~Ring()
 
 void Ring::SpawnRing( cocos2d::Layer *layer)
 {
-	CCLOG("SPAWN RING");
 
 	float a= 2.2;
 	float random = ((float)rand()/(float)(RAND_MAX)) * a;

@@ -69,7 +69,7 @@ bool GameOverScene::init()
 	PlayAgainOption->setScaleY(visibleSize.height/backgroundSprite->getContentSize().height * co_ordY);
 	PlayAgainOption->setPosition( Point( visibleSize.width / 2 + origin.x , visibleSize.height / 3 * 1.05 ) );
 
-	auto StatisticsOption = MenuItemImage::create( "home button.png" , "home button.png" , 
+	auto StatisticsOption = MenuItemImage::create( "home_button.png" , "home_button.png" , 
 		CC_CALLBACK_1( GameOverScene::GoToMainMenuScene , this ) );
 	StatisticsOption->setScaleX(visibleSize.width/backgroundSprite->getContentSize().width * co_ordX);
 	StatisticsOption->setScaleY(visibleSize.height/backgroundSprite->getContentSize().height * co_ordY);

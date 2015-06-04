@@ -88,27 +88,23 @@ void SeaAnimals::SpawnAnimals( cocos2d::Layer *layer )
 
 	
 	 
-	snake= CCSprite::create("snake-1.png");
+	snake= Sprite::create("snake-1.png");
 	snake->setScaleX(VisibleSize.width/backgroundSprite->getContentSize().width * 0.65);
 	snake->setScaleY(VisibleSize.height/backgroundSprite->getContentSize().height * 1.50);
 
-	//snake->setAnchorPoint( ccp(( VisibleSize.width + origin.x ) * rand_1 , VisibleSize .height /2 * 0.92 + origin.y ) );
-
-	//layer->scheduleUpdate(schedule_selector( SeaAnimals::update) );
 	snake->setPosition( Point( (VisibleSize.width   + origin.x) * rand_1 , VisibleSize.height / 2 * 0.92 + origin.y ) );
 
-	snakeBody = PhysicsBody::createBox( Size ( 20 , 0 ) );
+	snakeBody = PhysicsBody::createBox( Size ( 0 , 0 ) );
 
 	snakeBody->setCollisionBitmask( SNAKE_COLLISION_BITMASK );
 	snakeBody->setContactTestBitmask( true );
 
-	//snakeBody->setDynamic( true );
+
 
 	snake->setPhysicsBody( snakeBody );
 
 	auto snake_Action = MoveBy::create( 0.003 * VisibleSize.width, Point( -VisibleSize.width * rand_1 , 0 ) );
 
-	//MoveBy::create( (SNAKE_MOVEMENT_SPEED * VisibleSize.width ) , Point( -VisibleSize.width * rand_1 , 0 ));
 
 
 	animation = Animation::create();

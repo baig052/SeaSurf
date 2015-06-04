@@ -52,13 +52,13 @@ bool MainMenuScene::init()
 	
 	this->addChild(titleSprite);
 
-	auto PlayOption = MenuItemImage::create( "full button.png" , "full button.png" , 
+	auto PlayOption = MenuItemImage::create( "full_button.png" , "full_button.png" , 
 		CC_CALLBACK_1( MainMenuScene::GoToGameScene , this ) );
 	PlayOption->setScaleX(visibleSize.width/backgroundSprite->getContentSize().width * co_ordX);
 	PlayOption->setScaleY(visibleSize.height/backgroundSprite->getContentSize().height * co_ordY);
 	PlayOption->setPosition( Point( visibleSize.width / 2 + origin.x , visibleSize.height / 3  ) );
 
-	auto StatisticsOption = MenuItemImage::create( "home button.png" , "home button.png" , 
+	auto StatisticsOption = MenuItemImage::create( "home_button.png" , "home_button.png" , 
 		CC_CALLBACK_1( MainMenuScene::GoToGameScene , this ) );
 	StatisticsOption->setScaleX(visibleSize.width/backgroundSprite->getContentSize().width * co_ordX);
 	StatisticsOption->setScaleY(visibleSize.height/backgroundSprite->getContentSize().height * co_ordY);
